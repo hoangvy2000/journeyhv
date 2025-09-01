@@ -12,11 +12,10 @@ html {
 body {
     font-family: 'Noto Sans', sans-serif;
     background: linear-gradient(135deg, 
-        #0c0c0c 0%,
-        #1a1a1a 25%,
-        #2d2d30 50%,
-        #3c3c41 75%,
-        #4b4b50 100%
+        #1a1a2e 0%,
+        #16213e 30%,
+        #0f4c75 60%,
+        #3282b8 100%
     );
     background-attachment: fixed;
     min-height: 100vh;
@@ -26,8 +25,8 @@ body {
     position: relative;
 }
 
-/* Canvas cho hiệu ứng Attack on Titan */
-#titanCanvas {
+/* Floating particles background - nhẹ nhàng */
+.particles-container {
     position: fixed;
     top: 0;
     left: 0;
@@ -35,10 +34,34 @@ body {
     height: 100%;
     pointer-events: none;
     z-index: 1;
-    opacity: 0.8;
+    overflow: hidden;
 }
 
-/* Điều khiển hiệu ứng */
+.particle {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    animation: floatParticle 8s infinite ease-in-out;
+}
+
+@keyframes floatParticle {
+    0% {
+        transform: translateY(100vh) translateX(0px) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-100px) translateX(50px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Điều khiển hiệu ứng - đơn giản hơn */
 .effect-controls {
     position: fixed;
     top: 20px;
@@ -50,65 +73,46 @@ body {
 }
 
 .control-btn {
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.1),
-        rgba(255, 255, 255, 0.05)
-    );
+    background: rgba(255, 255, 255, 0.1);
     color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 12px 16px;
-    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px 14px;
+    border-radius: 20px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
     display: flex;
     align-items: center;
     gap: 8px;
     backdrop-filter: blur(10px);
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all 0.3s ease;
     font-family: inherit;
+    min-width: 120px;
 }
 
 .control-btn:hover {
-    transform: translateY(-2px) scale(1.05);
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.2),
-        rgba(255, 255, 255, 0.1)
-    );
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
 }
 
 .control-btn.active {
-    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-    color: white;
-    box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+    background: linear-gradient(135deg, #ff7675, #fd79a8);
+    border-color: rgba(255, 255, 255, 0.5);
 }
 
 .control-btn.playing {
-    background: linear-gradient(135deg, #4ecdc4, #44a08d);
-    animation: musicPulse 2s infinite ease-in-out;
-}
-
-@keyframes musicPulse {
-    0%, 100% { 
-        transform: scale(1); 
-        box-shadow: 0 0 0 0 rgba(78, 205, 196, 0.5);
-    }
-    50% { 
-        transform: scale(1.02); 
-        box-shadow: 0 0 0 10px rgba(78, 205, 196, 0);
-    }
+    background: linear-gradient(135deg, #74b9ff, #0984e3);
 }
 
 /* Container chính */
 .container {
     position: relative;
     z-index: 10;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* Header */
+/* Header - nhẹ nhàng hơn */
 .header {
     position: relative;
     height: 100vh;
@@ -117,19 +121,16 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    overflow: hidden;
 }
 
 .header-content {
-    position: relative;
-    z-index: 20;
-    animation: fadeInUp 1.5s ease-out;
+    animation: fadeInUp 1.2s ease-out;
 }
 
 @keyframes fadeInUp {
     0% {
         opacity: 0;
-        transform: translateY(60px);
+        transform: translateY(30px);
     }
     100% {
         opacity: 1;
@@ -143,45 +144,30 @@ body {
 
 .title-small {
     display: block;
-    font-size: 1.3rem;
-    color: #b0c4de;
+    font-size: 1.2rem;
+    color: #a8dadc;
     font-weight: 300;
     margin-bottom: 0.5rem;
-    opacity: 0.9;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 
 .title-main {
     display: block;
     font-family: 'Dancing Script', cursive;
-    font-size: 5rem;
+    font-size: 4.5rem;
     color: #fff;
     font-weight: 700;
     margin-bottom: 1rem;
-    text-shadow: 
-        0 0 10px rgba(255, 255, 255, 0.3),
-        0 0 20px rgba(255, 255, 255, 0.2),
-        0 0 30px rgba(255, 255, 255, 0.1);
-    background: linear-gradient(45deg, #ff6b6b, #ffa726, #42a5f5, #ab47bc);
-    background-size: 300% 300%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradientShift 4s ease-in-out infinite;
-}
-
-@keyframes gradientShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+    text-shadow: 0 2px 20px rgba(255, 255, 255, 0.3);
 }
 
 .title-sub {
     display: block;
-    font-size: 1.1rem;
-    color: #ddd;
+    font-size: 1rem;
+    color: #e9ecef;
     font-weight: 400;
     font-style: italic;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
 }
 
 .title-decoration {
@@ -189,46 +175,34 @@ body {
     display: flex;
     justify-content: center;
     gap: 2rem;
-    font-size: 2rem;
+    font-size: 1.8rem;
 }
 
 .deco-flower, .deco-heart {
-    animation: float 3s ease-in-out infinite;
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+    animation: gentleFloat 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
 }
 
 .deco-heart {
-    animation-delay: 0.5s;
-    animation: heartbeat 2s ease-in-out infinite;
+    animation-delay: 1s;
 }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(5deg); }
+@keyframes gentleFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
 }
 
-@keyframes heartbeat {
-    0%, 50%, 100% { 
-        transform: scale(1); 
-        filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.5));
-    }
-    25%, 75% { 
-        transform: scale(1.2); 
-        filter: drop-shadow(0 0 20px rgba(255, 107, 107, 0.8));
-    }
-}
-
-/* Timeline */
+/* Timeline - tối ưu */
 .timeline-wrapper {
     position: relative;
-    margin: 100px 0;
+    margin: 80px 0;
 }
 
 .timeline-path {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 4px;
+    width: 3px;
     height: 100%;
     z-index: 1;
 }
@@ -238,257 +212,201 @@ body {
     height: 100%;
     background: linear-gradient(180deg, 
         transparent 0%,
-        #ff6b6b 10%,
-        #ffa726 30%,
-        #42a5f5 50%,
-        #ab47bc 70%,
-        #4ecdc4 90%,
+        #74b9ff 20%,
+        #fd79a8 50%,
+        #fdcb6e 80%,
         transparent 100%
     );
     border-radius: 2px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    opacity: 0.8;
 }
 
 .timeline {
     position: relative;
     z-index: 2;
-    padding: 50px 0;
+    padding: 30px 0;
 }
 
-/* Memory cards */
+/* Memory cards - responsive và thân thiện */
 .memory-card {
     position: relative;
-    width: 48%;
-    margin: 80px 0;
+    width: 45%;
+    margin: 60px 0;
     opacity: 0;
-    transform: translateY(80px) scale(0.8);
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateY(30px);
+    transition: all 0.6s ease;
 }
 
 .memory-card.visible {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
 }
 
 .memory-card.left {
     margin-right: auto;
-    margin-left: 2%;
+    margin-left: 5%;
 }
 
 .memory-card.right {
     margin-left: auto;
-    margin-right: 2%;
+    margin-right: 5%;
 }
 
-.memory-background {
+.memory-image {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.memory-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.memory-card:hover .memory-image img {
+    transform: scale(1.05);
+}
+
+.image-overlay {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 25px;
-    opacity: 0.3;
-    transition: all 0.5s ease;
-    filter: blur(2px);
+    background: linear-gradient(135deg, 
+        rgba(116, 185, 255, 0.3),
+        rgba(253, 121, 168, 0.3)
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-.memory-card:hover .memory-background {
-    opacity: 0.5;
-    filter: blur(1px);
-    transform: scale(1.05);
+.memory-card:hover .image-overlay {
+    opacity: 1;
 }
 
 .memory-content {
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.1),
-        rgba(255, 255, 255, 0.05)
-    );
-    border-radius: 25px;
-    padding: 2.5rem;
-    position: relative;
-    backdrop-filter: blur(15px);
-    box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     cursor: pointer;
-    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    overflow: hidden;
-}
-
-.memory-content::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, 
-        transparent,
-        rgba(255, 255, 255, 0.1),
-        transparent
-    );
-    transition: left 0.5s;
-}
-
-.memory-content:hover::before {
-    left: 100%;
+    transition: all 0.3s ease;
 }
 
 .memory-content:hover {
-    transform: translateY(-15px) scale(1.02);
-    box-shadow: 
-        0 20px 60px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.15),
-        rgba(255, 255, 255, 0.08)
-    );
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .memory-icon {
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .icon-circle {
-    width: 70px;
-    height: 70px;
-    background: linear-gradient(135deg, #ff6b6b, #ffa726);
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #74b9ff, #fd79a8);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    box-shadow: 
-        0 8px 25px rgba(255, 107, 107, 0.4),
-        0 0 0 0 rgba(255, 107, 107, 0.5);
     color: white;
-    font-size: 1.8rem;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    animation: iconGlow 3s ease-in-out infinite;
-}
-
-@keyframes iconGlow {
-    0%, 100% { 
-        box-shadow: 
-            0 8px 25px rgba(255, 107, 107, 0.4),
-            0 0 0 0 rgba(255, 107, 107, 0.5);
-    }
-    50% { 
-        box-shadow: 
-            0 8px 25px rgba(255, 107, 107, 0.6),
-            0 0 0 10px rgba(255, 107, 107, 0);
-    }
-}
-
-.memory-card:hover .icon-circle {
-    transform: scale(1.1) rotateY(360deg);
-    background: linear-gradient(135deg, #42a5f5, #ab47bc);
+    font-size: 1.5rem;
+    box-shadow: 0 5px 15px rgba(116, 185, 255, 0.3);
 }
 
 .memory-date {
-    color: #b0c4de;
-    font-size: 0.95rem;
+    color: #a8dadc;
+    font-size: 0.9rem;
     font-weight: 600;
     text-align: center;
     margin-bottom: 0.8rem;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
 }
 
 .memory-title {
     font-family: 'Dancing Script', cursive;
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: #fff;
     text-align: center;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
     font-weight: 700;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .memory-desc {
     text-align: center;
-    color: #ddd;
-    font-size: 1rem;
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
+    color: #e9ecef;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
 }
 
 .memory-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.8rem;
+    gap: 0.6rem;
     justify-content: center;
 }
 
 .tag {
-    background: linear-gradient(135deg, 
-        rgba(255, 107, 107, 0.2),
-        rgba(255, 167, 38, 0.2)
-    );
+    background: rgba(116, 185, 255, 0.2);
     color: #fff;
-    padding: 0.4rem 1rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .tag:hover {
-    background: linear-gradient(135deg, 
-        rgba(255, 107, 107, 0.4),
-        rgba(255, 167, 38, 0.4)
-    );
-    transform: translateY(-2px);
+    background: rgba(116, 185, 255, 0.3);
+    transform: translateY(-1px);
 }
 
-/* Stats Section */
+/* Stats Section - tối ưu hơn */
 .stats-section {
     position: relative;
-    margin: 150px 0;
-    padding: 100px 0;
-    overflow: hidden;
+    margin: 100px 0;
+    padding: 80px 0;
 }
 
 .stats-content {
-    position: relative;
-    z-index: 10;
     text-align: center;
 }
 
 .stats-title {
     font-family: 'Dancing Script', cursive;
-    font-size: 3.5rem;
+    font-size: 3rem;
     color: #fff;
-    margin-bottom: 4rem;
-    text-shadow: 
-        0 0 10px rgba(255, 255, 255, 0.3),
-        0 0 20px rgba(255, 255, 255, 0.2);
+    margin-bottom: 3rem;
+    text-shadow: 0 2px 15px rgba(255, 255, 255, 0.3);
 }
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2.5rem;
-    max-width: 1000px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 800px;
     margin: 0 auto;
 }
 
 .stat-item {
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.1),
-        rgba(255, 255, 255, 0.05)
-    );
-    padding: 2.5rem;
-    border-radius: 25px;
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
 }
@@ -499,196 +417,175 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #ff6b6b, #ffa726, #42a5f5, #ab47bc);
-    background-size: 300% 300%;
-    animation: gradientShift 3s ease-in-out infinite;
+    height: 2px;
+    background: linear-gradient(90deg, #74b9ff, #fd79a8, #fdcb6e);
 }
 
 .stat-item:hover {
-    transform: translateY(-15px) scale(1.02);
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.15),
-        rgba(255, 255, 255, 0.08)
-    );
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
 }
 
 .stat-icon {
-    font-size: 3rem;
-    margin-bottom: 1.5rem;
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
 }
 
 .stat-number {
     font-family: 'Dancing Script', cursive;
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 700;
     color: #fff;
-    margin-bottom: 1rem;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 .stat-label {
-    color: #ddd;
-    font-size: 1.1rem;
-    font-weight: 600;
-    letter-spacing: 1px;
+    color: #e9ecef;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
 }
 
-/* Modal */
+/* Modal - đơn giản và đẹp */
 .modal {
     display: none;
     position: fixed;
-    z-index: 3000;
+    z-index: 2000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(8px);
-    animation: modalFadeIn 0.3s ease;
-}
-
-@keyframes modalFadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    backdrop-filter: blur(5px);
 }
 
 .modal-content {
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.15),
-        rgba(255, 255, 255, 0.05)
-    );
-    margin: 3% auto;
-    padding: 0;
-    border-radius: 30px;
-    width: 85%;
-    max-width: 700px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 5% auto;
+    border-radius: 25px;
+    width: 90%;
+    max-width: 600px;
     position: relative;
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
-    animation: modalSlideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation: modalSlide 0.3s ease;
 }
 
-@keyframes modalSlideIn {
+@keyframes modalSlide {
     from {
         opacity: 0;
-        transform: translateY(-80px) scale(0.8);
+        transform: translateY(-50px);
     }
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translateY(0);
     }
 }
 
 .close {
     color: #fff;
     float: right;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: bold;
     position: absolute;
-    right: 25px;
-    top: 20px;
-    z-index: 10;
+    right: 20px;
+    top: 15px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    opacity: 0.7;
+    transition: all 0.2s ease;
 }
 
 .close:hover {
-    opacity: 1;
+    color: #ff7675;
     transform: scale(1.1);
-    color: #ff6b6b;
 }
 
 .modal-body {
-    padding: 4rem 3rem 3rem;
+    padding: 3rem 2rem 2rem;
     text-align: center;
 }
 
+.modal-image {
+    width: 100%;
+    height: 250px;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.modal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .modal-icon {
-    width: 100px;
-    height: 100px;
-    background: linear-gradient(135deg, #ff6b6b, #ffa726);
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #74b9ff, #fd79a8);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 2.5rem;
-    box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+    margin: 0 auto 1.5rem;
     color: white;
-    font-size: 2.5rem;
-    animation: modalIconPulse 2s ease-in-out infinite;
-}
-
-@keyframes modalIconPulse {
-    0%, 100% { 
-        transform: scale(1);
-        box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
-    }
-    50% { 
-        transform: scale(1.05);
-        box-shadow: 0 20px 50px rgba(255, 107, 107, 0.6);
-    }
+    font-size: 2rem;
+    box-shadow: 0 10px 30px rgba(116, 185, 255, 0.3);
 }
 
 .modal-title {
     font-family: 'Dancing Script', cursive;
-    font-size: 2.8rem;
+    font-size: 2.5rem;
     color: #fff;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     font-weight: 700;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
 
 .modal-date {
-    color: #b0c4de;
-    font-size: 1.1rem;
+    color: #a8dadc;
+    font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 2.5rem;
-    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    letter-spacing: 1px;
 }
 
 .modal-description {
-    color: #ddd;
-    font-size: 1.2rem;
-    line-height: 1.8;
-    margin-bottom: 2.5rem;
+    color: #e9ecef;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
 }
 
 .modal-details {
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.1),
-        rgba(255, 255, 255, 0.05)
-    );
-    padding: 2rem;
-    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 15px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #ddd;
+    color: #e9ecef;
     font-style: italic;
-    line-height: 1.7;
-    backdrop-filter: blur(10px);
+    line-height: 1.6;
 }
 
-/* Responsive Design */
+/* Responsive Design - tối ưu cho mobile */
 @media (max-width: 1024px) {
     .memory-card,
     .memory-card.left,
     .memory-card.right {
-        width: 80%;
+        width: 70%;
         margin-left: auto;
         margin-right: auto;
     }
     
     .timeline-path {
-        left: 50px;
+        left: 40px;
     }
     
     .memory-card.left,
     .memory-card.right {
         margin-left: 80px;
+        margin-right: auto;
     }
 }
 
@@ -698,20 +595,27 @@ body {
     }
     
     .title-main {
-        font-size: 4rem;
+        font-size: 3.5rem;
     }
     
     .memory-card,
     .memory-card.left,
     .memory-card.right {
-        width: 90%;
-        margin-left: auto;
-        margin-right: auto;
+        width: 85%;
         margin-left: 60px;
+        margin-right: auto;
     }
     
     .timeline-path {
         left: 30px;
+    }
+    
+    .memory-content {
+        padding: 1.5rem;
+    }
+    
+    .memory-image {
+        height: 180px;
     }
     
     .stats-grid {
@@ -725,22 +629,35 @@ body {
     }
     
     .modal-body {
-        padding: 3rem 2rem 2rem;
+        padding: 2.5rem 1.5rem 1.5rem;
     }
     
     .effect-controls {
-        gap: 5px;
+        gap: 8px;
     }
     
     .control-btn {
-        padding: 10px 12px;
+        padding: 8px 12px;
         font-size: 12px;
+        min-width: 100px;
     }
 }
 
 @media (max-width: 480px) {
     .title-main {
-        font-size: 3rem;
+        font-size: 2.8rem;
+    }
+    
+    .memory-card,
+    .memory-card.left,
+    .memory-card.right {
+        width: 90%;
+        margin-left: 50px;
+        margin-right: auto;
+    }
+    
+    .timeline-path {
+        left: 25px;
     }
     
     .stats-grid {
@@ -748,142 +665,64 @@ body {
     }
     
     .memory-content {
-        padding: 2rem;
+        padding: 1.2rem;
+    }
+    
+    .memory-image {
+        height: 160px;
     }
     
     .memory-title {
-        font-size: 1.7rem;
+        font-size: 1.5rem;
     }
     
     .stats-title {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
     
     .modal-title {
-        font-size: 2.2rem;
+        font-size: 2rem;
+    }
+    
+    .modal-image {
+        height: 200px;
     }
 }
 
 /* Smooth scrollbar */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
+    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #ff6b6b, #ffa726);
-    border-radius: 5px;
+    background: linear-gradient(180deg, #74b9ff, #fd79a8);
+    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #42a5f5, #ab47bc);
+    background: linear-gradient(180deg, #0984e3, #e84393);
 }
 
-/* Hiệu ứng Attack on Titan - Lightning/Thunder */
-.titan-flash {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, 
-        rgba(255, 255, 255, 0.9) 0%,
-        rgba(135, 206, 250, 0.6) 30%,
-        rgba(255, 215, 0, 0.3) 60%,
-        transparent 100%
-    );
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0;
-    animation: titanFlash 0.3s ease-out;
+/* Loading states */
+.memory-card img {
+    transition: opacity 0.3s ease;
 }
 
-@keyframes titanFlash {
-    0% { opacity: 0; }
-    50% { opacity: 1; }
-    100% { opacity: 0; }
+.memory-card img[data-loading="true"] {
+    opacity: 0.5;
 }
 
-.lightning-bolt {
-    position: absolute;
-    width: 3px;
-    background: linear-gradient(180deg, 
-        #fff 0%,
-        #87ceeb 50%,
-        #ffd700 100%
-    );
-    box-shadow: 
-        0 0 10px #fff,
-        0 0 20px #87ceeb,
-        0 0 30px #ffd700;
-    opacity: 0;
-    animation: lightning 0.5s ease-out;
+/* Animation cho số đếm */
+.counting {
+    animation: countUp 0.1s ease-in-out;
 }
 
-@keyframes lightning {
-    0% { opacity: 0; transform: scaleY(0); }
-    20% { opacity: 1; transform: scaleY(1); }
-    100% { opacity: 0; transform: scaleY(1); }
-}
-
-/* Hiệu ứng gió và khói */
-.wind-effect {
-    position: absolute;
-    width: 100px;
-    height: 2px;
-    background: linear-gradient(90deg, 
-        transparent 0%,
-        rgba(255, 255, 255, 0.3) 50%,
-        transparent 100%
-    );
-    animation: windBlow 2s ease-in-out infinite;
-}
-
-@keyframes windBlow {
-    0% { 
-        transform: translateX(-100px) scaleX(0.5);
-        opacity: 0;
-    }
-    50% { 
-        transform: translateX(50vw) scaleX(1);
-        opacity: 1;
-    }
-    100% { 
-        transform: translateX(100vw) scaleX(0.5);
-        opacity: 0;
-    }
-}
-
-/* Loading animation cải tiến */
-.loading-titan {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 4rem;
-    z-index: 10000;
-    animation: titanAwaken 2s ease-in-out infinite;
-}
-
-@keyframes titanAwaken {
-    0%, 100% {
-        transform: translate(-50%, -50%) scale(1);
-        filter: drop-shadow(0 0 20px rgba(255, 107, 107, 0.5));
-    }
-    25% {
-        transform: translate(-50%, -50%) scale(1.2);
-        filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.8));
-    }
-    50% {
-        transform: translate(-50%, -50%) scale(0.8);
-        filter: drop-shadow(0 0 60px rgba(66, 165, 245, 0.6));
-    }
-    75% {
-        transform: translate(-50%, -50%) scale(1.1);
-        filter: drop-shadow(0 0 30px rgba(171, 71, 188, 0.7));
-    }
+@keyframes countUp {
+    0% { transform: translateY(10px); opacity: 0.5; }
+    100% { transform: translateY(0); opacity: 1; }
 }
