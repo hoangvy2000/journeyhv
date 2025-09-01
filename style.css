@@ -106,14 +106,14 @@ body {
     width: 50%;
     height: 100%;
     background: #fefefe;
-    border-radius: 0 15px 15px 0;
+    border-radius: 15px 0 0 15px;
     box-shadow: 0 0 30px rgba(0,0,0,0.3);
-    transform-origin: left center;
+    transform-origin: right center;
     transform-style: preserve-3d;
     transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     overflow: hidden;
     cursor: pointer;
-    right: 0;
+    left: 0;
 }
 
 .page:hover {
@@ -395,7 +395,7 @@ body {
 
 /* Page flip animations */
 .page.flipped {
-    transform: rotateY(-180deg);
+    transform: rotateY(180deg);
     z-index: 1;
 }
 
@@ -412,16 +412,16 @@ body {
     visibility: visible;
 }
 
-/* Animation cho việc lật trang */
+/* Animation cho việc lật trang từ phải qua trái */
 @keyframes pageFlip {
     0% {
         transform: rotateY(0deg);
     }
     50% {
-        transform: rotateY(-90deg);
+        transform: rotateY(90deg);
     }
     100% {
-        transform: rotateY(-180deg);
+        transform: rotateY(180deg);
     }
 }
 
