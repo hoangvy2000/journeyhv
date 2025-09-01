@@ -1,128 +1,350 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Hành Trình Của Hai Mình</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyện Tình Yêu Của Chúng Mình 🌸</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,400;0,600;1,400&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Background layer -->
-  <div id="bg-parallax"></div>
+    <!-- Floating particles background -->
+    <div class="particles-container" id="particles"></div>
 
-  <!-- Floating FAB controls -->
-  <div class="fab">
-    <button id="fabMain" aria-label="Mở cài đặt hiệu ứng"><i class="fa-solid fa-sliders"></i></button>
-    <div class="fab-menu" id="fabMenu">
-      <button id="toggleMusic"><i class="fa-solid fa-music"></i><span>Nhạc nền</span></button>
-      <button id="toggleParticles"><i class="fa-solid fa-sparkles"></i><span>Hiệu ứng</span></button>
-      <button id="toggleAOT"><i class="fa-solid fa-shield-halved"></i><span>AOT mode</span></button>
+    <!-- Audio player -->
+    <audio id="backgroundMusic" loop>
+        <source src="background-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Điều khiển hiệu ứng -->
+    <div class="effect-controls">
+        <button id="musicToggle" class="control-btn">
+            <i class="fas fa-music"></i>
+            <span>Nhạc nền</span>
+        </button>
+        <button id="particlesToggle" class="control-btn active">
+            <i class="fas fa-sparkles"></i>
+            <span>Hiệu ứng</span>
+        </button>
     </div>
-  </div>
 
-  <!-- Audio (mặc định tắt) -->
-  <audio id="bgm" loop preload="none">
-    <source src="audio/your-song.mp3" type="audio/mpeg"/>
-  </audio>
-
-  <!-- Particles (nhẹ, tùy chọn) -->
-  <div id="particles" aria-hidden="true"></div>
-
-  <header class="hero">
+    <!-- Container chính -->
     <div class="container">
-      <h1 class="title">
-        <span class="t-small">A Journey of</span>
-        <span class="t-main">Two Years</span>
-        <span class="t-sub">và vẫn tiếp tục…</span>
-      </h1>
-      <a class="btn" href="#timeline">Xem hành trình</a>
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="main-title">
+                    <span class="title-small">Chuyện tình của</span>
+                    <span class="title-main">Chúng mình</span>
+                    <span class="title-sub">Hơn 2 năm ngọt ngào bên nhau</span>
+                </h1>
+                <div class="title-decoration">
+                    <span class="deco-flower">🌸</span>
+                    <span class="deco-heart">💕</span>
+                    <span class="deco-flower">🌸</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Timeline -->
+        <div class="timeline-wrapper">
+            <div class="timeline-path">
+                <div class="path-line"></div>
+            </div>
+
+            <div class="timeline">
+                <!-- Kỷ niệm 1: Gặp nhau lần đầu -->
+                <div class="memory-card left" data-memory="memory1">
+                    <div class="memory-image">
+                        <img src="https://images.unsplash.com/photo-1518621012118-1d014ca9071d?w=400&h=300&fit=crop" alt="Gặp nhau lần đầu" loading="lazy">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="memory-content">
+                        <div class="memory-icon">
+                            <div class="icon-circle">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                        </div>
+                        <div class="memory-date">Tháng 5, 2023</div>
+                        <h3 class="memory-title">Gặp nhau lần đầu</h3>
+                        <p class="memory-desc">Như một câu chuyện cổ tích bắt đầu, hai trái tim tìm thấy nhau trong một ngày xuân thật đẹp...</p>
+                        <div class="memory-tags">
+                            <span class="tag">💕 Định mệnh</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kỷ niệm 2: Tỏ tình -->
+                <div class="memory-card right" data-memory="memory2">
+                    <div class="memory-image">
+                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop" alt="Tỏ tình tại cafe" loading="lazy">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="memory-content">
+                        <div class="memory-icon">
+                            <div class="icon-circle">
+                                <i class="fas fa-coffee"></i>
+                            </div>
+                        </div>
+                        <div class="memory-date">01/09/2023</div>
+                        <h3 class="memory-title">Lời tỏ tình</h3>
+                        <p class="memory-desc">Tại quán cafe Xưa 1985 (20 Bác Ái), những lời yêu thương đầu tiên được thì thầm...</p>
+                        <div class="memory-tags">
+                            <span class="tag">☕ Cafe Xưa 1985</span>
+                            <span class="tag">💖 Lời yêu đầu</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kỷ niệm 3: Du lịch đầu tiên -->
+                <div class="memory-card left" data-memory="memory3">
+                    <div class="memory-image">
+                        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop" alt="Đảo Bình Hưng" loading="lazy">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="memory-content">
+                        <div class="memory-icon">
+                            <div class="icon-circle">
+                                <i class="fas fa-ship"></i>
+                            </div>
+                        </div>
+                        <div class="memory-date">15/09/2023</div>
+                        <h3 class="memory-title">Đảo Bình Hưng</h3>
+                        <p class="memory-desc">Chuyến du lịch đầu tiên cùng công ty, nhưng trái tim chỉ nhìn thấy nhau...</p>
+                        <div class="memory-tags">
+                            <span class="tag">🏝️ Đảo xinh</span>
+                            <span class="tag">👥 Cùng công ty</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kỷ niệm 4: Vũng Tàu -->
+                <div class="memory-card right" data-memory="memory4">
+                    <div class="memory-image">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=300&fit=crop" alt="Vũng Tàu đón năm mới" loading="lazy">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="memory-content">
+                        <div class="memory-icon">
+                            <div class="icon-circle">
+                                <i class="fas fa-umbrella-beach"></i>
+                            </div>
+                        </div>
+                        <div class="memory-date">31/12/2023</div>
+                        <h3 class="memory-title">Vũng Tàu đón năm mới</h3>
+                        <p class="memory-desc">Chỉ có hai đứa mình, bãi biển và những ước nguyện cho năm mới...</p>
+                        <div class="memory-tags">
+                            <span class="tag">🌊 Biển Vũng Tàu</span>
+                            <span class="tag">🎊 Năm mới</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kỷ niệm 5: Hồ Trị An -->
+                <div class="memory-card left" data-memory="memory5">
+                    <div class="memory-image">
+                        <img src="https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=400&h=300&fit=crop" alt="Hồ Trị An" loading="lazy">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="memory-content">
+                        <div class="memory-icon">
+                            <div class="icon-circle">
+                                <i class="fas fa-water"></i>
+                            </div>
+                        </div>
+                        <div class="memory-date">17/02/2024</div>
+                        <h3 class="memory-title">Hồ Trị An</h3>
+                        <p class="memory-desc">Cùng hội bạn thân khám phá vẻ đẹp thanh bình của hồ nước...</p>
+                        <div class="memory-tags">
+                            <span class="tag">🏞️ Hồ Trị An</span>
+                            <span class="tag">👫 Hội bạn thân</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kỷ niệm 6: Nam Cát Tiên -->
+                <div class="memory-card right" data-memory="memory6">
+                    <div class="memory-image">
+                        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop" alt="Nam Cát Tiên" loading="lazy">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="memory-content">
+                        <div class="memory-icon">
+                            <div class="icon-circle">
+                                <i class="fas fa-tree"></i>
+                            </div>
+                        </div>
+                        <div class="memory-date">11/05/2024</div>
+                        <h3 class="memory-title">Nam Cát Tiên chill</h3>
+                        <p class="memory-desc">Giữa rừng xanh mướt, tìm thấy sự yên bình trong vòng tay nhau...</p>
+                        <div class="memory-tags">
+                            <span class="tag">🌲 Rừng xanh</span>
+                            <span class="tag">😌 Chill</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kỷ niệm 7: Làm phụ rể -->
+                <div class="memory-card left" data-memory="memory7">
+                    <div class="memory-image">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=300&fit=crop" alt="Phụ rể và phù dâu" loading="lazy">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="memory-content">
+                        <div class="memory-icon">
+                            <div class="icon-circle">
+                                <i class="fas fa-rings-wedding"></i>
+                            </div>
+                        </div>
+                        <div class="memory-date">22/06/2024</div>
+                        <h3 class="memory-title">Phụ rể và phù dâu</h3>
+                        <p class="memory-desc">Lần đầu làm phụ rể và được bé bồ làm phù dâu - như thử nghiệm cho tương lai...</p>
+                        <div class="memory-tags">
+                            <span class="tag">💒 Đám cưới</span>
+                            <span class="tag">👰‍♂️ Phụ rể & Phù dâu</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kỷ niệm 8: 1 năm yêu nhau -->
+                <div class="memory-card right" data-memory="memory8">
+                    <div class="memory-image">
+                        <img src="https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=300&fit=crop" alt="1 năm yêu nhau" loading="lazy">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="memory-content">
+                        <div class="memory-icon">
+                            <div class="icon-circle">
+                                <i class="fas fa-birthday-cake"></i>
+                            </div>
+                        </div>
+                        <div class="memory-date">01/09/2024</div>
+                        <h3 class="memory-title">1 năm yêu nhau</h3>
+                        <p class="memory-desc">Kỷ niệm 1 năm tại biển Hoài Nhơn và tuần khám phá Bình Định đầy ý nghĩa...</p>
+                        <div class="memory-tags">
+                            <span class="tag">🎂 1 năm</span>
+                            <span class="tag">🏖️ Bình Định</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kỷ niệm 9: Thiện nguyện -->
+                <div class="memory-card left" data-memory="memory9">
+                    <div class="memory-image">
+                        <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=400&h=300&fit=crop" alt="Thiện nguyện Trà Vinh" loading="lazy">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="memory-content">
+                        <div class="memory-icon">
+                            <div class="icon-circle">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                        </div>
+                        <div class="memory-date">17/09/2024</div>
+                        <h3 class="memory-title">Thiện nguyện Trà Vinh</h3>
+                        <p class="memory-desc">Lần đầu cùng nhau làm thiện nguyện, chia sẻ yêu thương với cộng đồng...</p>
+                        <div class="memory-tags">
+                            <span class="tag">🤝 Thiện nguyện</span>
+                            <span class="tag">❤️ Yêu thương</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kỷ niệm 10: Cá - chú mèo -->
+                <div class="memory-card right" data-memory="memory10">
+                    <div class="memory-image">
+                        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=300&fit=crop" alt="Nhặt được bé Cá" loading="lazy">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="memory-content">
+                        <div class="memory-icon">
+                            <div class="icon-circle">
+                                <i class="fas fa-cat"></i>
+                            </div>
+                        </div>
+                        <div class="memory-date">25/10/2024</div>
+                        <h3 class="memory-title">Nhặt được bé Cá</h3>
+                        <p class="memory-desc">Thành viên mới của gia đình nhỏ - chú mèo Cá đáng yêu...</p>
+                        <div class="memory-tags">
+                            <span class="tag">🐱 Mèo Cá</span>
+                            <span class="tag">👨‍👩‍🐱 Gia đình nhỏ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kỷ niệm 11: Rooftop -->
+                <div class="memory-card left" data-memory="memory11">
+                    <div class="memory-image">
+                        <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=300&fit=crop" alt="Khám phá rooftop" loading="lazy">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="memory-content">
+                        <div class="memory-icon">
+                            <div class="icon-circle">
+                                <i class="fas fa-building"></i>
+                            </div>
+                        </div>
+                        <div class="memory-date">05/01/2025</div>
+                        <h3 class="memory-title">Khám phá rooftop</h3>
+                        <p class="memory-desc">Tìm được quán rooftop yêu thích, ngắm thành phố từ trên cao...</p>
+                        <div class="memory-tags">
+                            <span class="tag">🏙️ Rooftop</span>
+                            <span class="tag">🌃 View đẹp</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thống kê đẹp -->
+        <section class="stats-section">
+            <div class="stats-content">
+                <h2 class="stats-title">Hành trình của chúng mình</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-number" data-count="731">0</div>
+                        <div class="stat-label">Ngày bên nhau</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">🎯</div>
+                        <div class="stat-number" data-count="15">0</div>
+                        <div class="stat-label">Chuyến đi</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">📸</div>
+                        <div class="stat-number" data-count="1000">0</div>
+                        <div class="stat-label">Khoảnh khắc</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">💕</div>
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label">Tình yêu</div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-  </header>
 
-  <!-- TIMELINE: mỗi card mở modal chi tiết -->
-  <main>
-    <section id="timeline" class="container">
-      <div class="line"></div>
-
-      <!-- ví dụ 3 mốc, bạn thêm/bớt tùy thích -->
-      <article class="card left" data-memory="memory2">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&h=600&fit=crop" alt="Lời tỏ tình" loading="lazy">
+    <!-- Modal cho chi tiết kỷ niệm -->
+    <div id="memoryModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <img src="" alt="" id="modalImage">
+                </div>
+                <div class="modal-icon"></div>
+                <h2 class="modal-title"></h2>
+                <div class="modal-date"></div>
+                <div class="modal-description"></div>
+                <div class="modal-details"></div>
+            </div>
         </div>
-        <div class="card-body">
-          <h3>Lời tỏ tình</h3>
-          <time>01/09/2023</time>
-          <p>Tại quán cafe Xưa 1985 (20 Bác Ái)…</p>
-          <button class="btn-ghost">Xem chi tiết</button>
-        </div>
-      </article>
-
-      <article class="card right" data-memory="memory6">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop" alt="Nam Cát Tiên" loading="lazy">
-        </div>
-        <div class="card-body">
-          <h3>Nam Cát Tiên chill</h3>
-          <time>11/05/2024</time>
-          <p>Giữa rừng xanh mướt, bình yên trong vòng tay nhau…</p>
-          <button class="btn-ghost">Xem chi tiết</button>
-        </div>
-      </article>
-
-      <article class="card left" data-memory="memory8">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1464207687429-7505649dae38?w=800&h=600&fit=crop" alt="Kỷ niệm 1 năm" loading="lazy">
-        </div>
-        <div class="card-body">
-          <h3>1 năm bên nhau</h3>
-          <time>01/09/2024</time>
-          <p>Biển Hoài Nhơn & tuần khám phá Bình Định…</p>
-          <button class="btn-ghost">Xem chi tiết</button>
-        </div>
-      </article>
-    </section>
-
-    <!-- Stats xinh gọn -->
-    <section class="stats container">
-      <div class="stat">
-        <div class="n" data-count="731">0</div><div class="l">Ngày bên nhau</div>
-      </div>
-      <div class="stat">
-        <div class="n" data-count="15">0</div><div class="l">Chuyến đi</div>
-      </div>
-      <div class="stat">
-        <div class="n" data-count="1000">0</div><div class="l">Khoảnh khắc</div>
-      </div>
-      <div class="stat">
-        <div class="n">∞</div><div class="l">Tình yêu</div>
-      </div>
-    </section>
-  </main>
-
-  <!-- MODAL: scrollable, swipe trái/phải để chuyển kỷ niệm -->
-  <div id="modal" class="modal" aria-hidden="true">
-    <div class="sheet" role="dialog" aria-modal="true">
-      <button class="close" aria-label="Đóng">&times;</button>
-      <div class="sheet-body">
-        <figure class="m-img"><img id="mImage" alt=""></figure>
-        <div class="m-meta">
-          <div class="m-icon" id="mIcon"></div>
-          <h2 id="mTitle"></h2>
-          <time id="mDate"></time>
-        </div>
-        <p class="m-desc" id="mDesc"></p>
-        <p class="m-details" id="mDetails"></p>
-      </div>
-      <button class="nav prev" aria-label="Trước">&#10094;</button>
-      <button class="nav next" aria-label="Sau">&#10095;</button>
     </div>
-  </div>
 
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
