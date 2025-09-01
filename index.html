@@ -9,46 +9,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Audio cho nhạc nền -->
-    <audio id="backgroundMusic" loop>
-        <source src="https://www.soundjay.com/misc/sounds/wind-through-trees.mp3" type="audio/mpeg">
-        <!-- Fallback: Sử dụng API tạo âm thanh tự nhiên -->
-    </audio>
+    <!-- Canvas cho hiệu ứng Attack on Titan -->
+    <canvas id="titanCanvas"></canvas>
 
-    <!-- Điều khiển nhạc -->
-    <div class="music-control">
-        <button id="musicToggle" class="music-btn">
+    <!-- Điều khiển hiệu ứng -->
+    <div class="effect-controls">
+        <button id="musicToggle" class="control-btn">
             <i class="fas fa-music"></i>
             <span>Nhạc nền</span>
         </button>
-        <button id="rainToggle" class="rain-btn">
-            <i class="fas fa-cloud-rain"></i>
-            <span>Mưa rơi</span>
+        <button id="titanToggle" class="control-btn">
+            <i class="fas fa-bolt"></i>
+            <span>Titan Effect</span>
         </button>
-    </div>
-
-    <!-- Canvas cho hiệu ứng hạt -->
-    <canvas id="particleCanvas"></canvas>
-
-    <!-- Các phần tử bay lơ lửng -->
-    <div class="floating-elements">
-        <div class="cloud cloud-1">☁️</div>
-        <div class="cloud cloud-2">☁️</div>
-        <div class="cloud cloud-3">☁️</div>
-        <div class="leaf leaf-1">🍃</div>
-        <div class="leaf leaf-2">🌿</div>
-        <div class="petal petal-1">🌸</div>
-        <div class="petal petal-2">🌺</div>
     </div>
 
     <!-- Container chính -->
     <div class="container">
         <!-- Header -->
         <header class="header">
-            <div class="header-bg">
-                <div class="grass-layer"></div>
-                <div class="tree-silhouette"></div>
-            </div>
             <div class="header-content">
                 <h1 class="main-title">
                     <span class="title-small">Chuyện tình của</span>
@@ -66,18 +45,13 @@
         <!-- Timeline -->
         <div class="timeline-wrapper">
             <div class="timeline-path">
-                <svg viewBox="0 0 100 2000" class="path-svg">
-                    <path d="M50 0 Q30 100 50 200 Q70 300 50 400 Q30 500 50 600 Q70 700 50 800 Q30 900 50 1000 Q70 1100 50 1200 Q30 1300 50 1400 Q70 1500 50 1600 Q30 1700 50 1800 Q70 1900 50 2000" 
-                          stroke="#8fbc8f" 
-                          stroke-width="3" 
-                          fill="none" 
-                          stroke-dasharray="5,5"/>
-                </svg>
+                <div class="path-line"></div>
             </div>
 
             <div class="timeline">
                 <!-- Kỷ niệm 1: Gặp nhau lần đầu -->
-                <div class="memory-card left" data-memory="memory1">
+                <div class="memory-card left" data-memory="memory1" data-bg="memory1.jpg">
+                    <div class="memory-background"></div>
                     <div class="memory-content">
                         <div class="memory-icon">
                             <div class="icon-circle">
@@ -94,7 +68,8 @@
                 </div>
 
                 <!-- Kỷ niệm 2: Tỏ tình -->
-                <div class="memory-card right" data-memory="memory2">
+                <div class="memory-card right" data-memory="memory2" data-bg="memory2.jpg">
+                    <div class="memory-background"></div>
                     <div class="memory-content">
                         <div class="memory-icon">
                             <div class="icon-circle">
@@ -112,7 +87,8 @@
                 </div>
 
                 <!-- Kỷ niệm 3: Du lịch đầu tiên -->
-                <div class="memory-card left" data-memory="memory3">
+                <div class="memory-card left" data-memory="memory3" data-bg="memory3.jpg">
+                    <div class="memory-background"></div>
                     <div class="memory-content">
                         <div class="memory-icon">
                             <div class="icon-circle">
@@ -130,7 +106,8 @@
                 </div>
 
                 <!-- Kỷ niệm 4: Vũng Tàu -->
-                <div class="memory-card right" data-memory="memory4">
+                <div class="memory-card right" data-memory="memory4" data-bg="memory4.jpg">
+                    <div class="memory-background"></div>
                     <div class="memory-content">
                         <div class="memory-icon">
                             <div class="icon-circle">
@@ -148,7 +125,8 @@
                 </div>
 
                 <!-- Kỷ niệm 5: Hồ Trị An -->
-                <div class="memory-card left" data-memory="memory5">
+                <div class="memory-card left" data-memory="memory5" data-bg="memory5.jpg">
+                    <div class="memory-background"></div>
                     <div class="memory-content">
                         <div class="memory-icon">
                             <div class="icon-circle">
@@ -166,7 +144,8 @@
                 </div>
 
                 <!-- Kỷ niệm 6: Nam Cát Tiên -->
-                <div class="memory-card right" data-memory="memory6">
+                <div class="memory-card right" data-memory="memory6" data-bg="memory6.jpg">
+                    <div class="memory-background"></div>
                     <div class="memory-content">
                         <div class="memory-icon">
                             <div class="icon-circle">
@@ -184,7 +163,8 @@
                 </div>
 
                 <!-- Kỷ niệm 7: Làm phụ rể -->
-                <div class="memory-card left" data-memory="memory7">
+                <div class="memory-card left" data-memory="memory7" data-bg="memory7.jpg">
+                    <div class="memory-background"></div>
                     <div class="memory-content">
                         <div class="memory-icon">
                             <div class="icon-circle">
@@ -202,7 +182,8 @@
                 </div>
 
                 <!-- Kỷ niệm 8: 1 năm yêu nhau -->
-                <div class="memory-card right" data-memory="memory8">
+                <div class="memory-card right" data-memory="memory8" data-bg="memory8.jpg">
+                    <div class="memory-background"></div>
                     <div class="memory-content">
                         <div class="memory-icon">
                             <div class="icon-circle">
@@ -220,7 +201,8 @@
                 </div>
 
                 <!-- Kỷ niệm 9: Thiện nguyện -->
-                <div class="memory-card left" data-memory="memory9">
+                <div class="memory-card left" data-memory="memory9" data-bg="memory9.jpg">
+                    <div class="memory-background"></div>
                     <div class="memory-content">
                         <div class="memory-icon">
                             <div class="icon-circle">
@@ -238,7 +220,8 @@
                 </div>
 
                 <!-- Kỷ niệm 10: Cá - chú mèo -->
-                <div class="memory-card right" data-memory="memory10">
+                <div class="memory-card right" data-memory="memory10" data-bg="memory10.jpg">
+                    <div class="memory-background"></div>
                     <div class="memory-content">
                         <div class="memory-icon">
                             <div class="icon-circle">
@@ -256,7 +239,8 @@
                 </div>
 
                 <!-- Kỷ niệm 11: Rooftop -->
-                <div class="memory-card left" data-memory="memory11">
+                <div class="memory-card left" data-memory="memory11" data-bg="memory11.jpg">
+                    <div class="memory-background"></div>
                     <div class="memory-content">
                         <div class="memory-icon">
                             <div class="icon-circle">
@@ -277,11 +261,6 @@
 
         <!-- Thống kê đẹp -->
         <section class="stats-section">
-            <div class="stats-bg">
-                <div class="hill hill-1"></div>
-                <div class="hill hill-2"></div>
-                <div class="hill hill-3"></div>
-            </div>
             <div class="stats-content">
                 <h2 class="stats-title">Hành trình của chúng mình</h2>
                 <div class="stats-grid">
