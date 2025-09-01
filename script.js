@@ -135,7 +135,7 @@ function nextPage() {
         currentPageIndex++;
         flipToPage(currentPageIndex);
         updateNavigation();
-        playFlipSound();
+        playRealisticFlipSound();
     }
 }
 
@@ -144,7 +144,7 @@ function prevPage() {
         currentPageIndex--;
         flipToPage(currentPageIndex);
         updateNavigation();
-        playFlipSound();
+        playRealisticFlipSound();
     }
 }
 
@@ -153,7 +153,7 @@ function goToPage(pageIndex) {
         currentPageIndex = pageIndex;
         flipToPage(currentPageIndex);
         updateNavigation();
-        playFlipSound();
+        playRealisticFlipSound();
     }
 }
 
@@ -202,26 +202,120 @@ function updateNavigation() {
     }
 }
 
-// Sound effects (optional)
-function playFlipSound() {
+// REALISTIC PAGE FLIP SOUND EFFECT
+function playRealisticFlipSound() {
     try {
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
         
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
+        // Create complex sound for realistic page flip
+        const duration = 0.3;
+        const currentTime = audioContext.currentTime;
         
-        oscillator.type = 'square';
-        oscillator.frequency.setValueAtTime(1000, audioContext.currentTime);
+        // Sound 1: Initial paper rustle (high frequency)
+        const osc1 = audioContext.createOscillator();
+        const gain1 = audioContext.createGain();
         
-        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.05);
+        osc1.connect(gain1);
+        gain1.connect(audioContext.destination);
         
-        oscillator.start(audioContext.currentTime);
-        oscillator.stop(audioContext.currentTime + 0.05);
+        osc1.type = 'sawtooth';
+        osc1.frequency.setValueAtTime(2500, currentTime);
+        osc1.frequency.exponentialRampToValueAtTime(1200, currentTime + 0.05);
+        osc1.frequency.exponentialRampToValueAtTime(800, currentTime + 0.15);
+        
+        gain1.gain.setValueAtTime(0.02, currentTime);
+        gain1.gain.exponentialRampToValueAtTime(0.04, currentTime + 0.02);
+        gain1.gain.exponentialRampToValueAtTime(0.001, currentTime + 0.15);
+        
+        // Sound 2: Page movement (mid frequency)
+        const osc2 = audioContext.createOscillator();
+        const gain2 = audioContext.createGain();
+        
+        osc2.connect(gain2);
+        gain2.connect(audioContext.destination);
+        
+        osc2.type = 'triangle';
+        osc2.frequency.setValueAtTime(400, currentTime);
+        osc2.frequency.exponentialRampToValueAtTime(300, currentTime + 0.1);
+        osc2.frequency.exponentialRampToValueAtTime(180, currentTime + 0.25);
+        
+        gain2.gain.setValueAtTime(0.03, currentTime);
+        gain2.gain.exponentialRampToValueAtTime(0.05, currentTime + 0.05);
+        gain2.gain.exponentialRampToValueAtTime(0.001, currentTime + 0.25);
+        
+        // Sound 3: Paper settling (low frequency)
+        const osc3 = audioContext.createOscillator();
+        const gain3 = audioContext.createGain();
+        
+        osc3.connect(gain3);
+        gain3.connect(audioContext.destination);
+        
+        osc3.type = 'sine';
+        osc3.frequency.setValueAtTime(120, currentTime + 0.15);
+        osc3.frequency.exponentialRampToValueAtTime(80, currentTime + 0.3);
+        
+        gain3.gain.setValueAtTime(0, currentTime);
+        gain3.gain.linearRampToValueAtTime(0.025, currentTime + 0.15);
+        gain3.gain.exponentialRampToValueAtTime(0.001, currentTime + 0.3);
+        
+        // Add white noise for texture
+        const bufferSize = audioContext.sampleRate * 0.2;
+        const noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+        const noiseOutput = noiseBuffer.getChannelData(0);
+        
+        for (let i = 0; i < bufferSize; i++) {
+            noiseOutput[i] = (Math.random() * 2 - 1) * 0.015;
+        }
+        
+        const noiseSource = audioContext.createBufferSource();
+        const noiseGain = audioContext.createGain();
+        const noiseFilter = audioContext.createBiquadFilter();
+        
+        noiseSource.buffer = noiseBuffer;
+        noiseSource.connect(noiseFilter);
+        noiseFilter.connect(noiseGain);
+        noiseGain.connect(audioContext.destination);
+        
+        noiseFilter.type = 'highpass';
+        noiseFilter.frequency.setValueAtTime(1500, currentTime);
+        noiseFilter.frequency.exponentialRampToValueAtTime(800, currentTime + 0.2);
+        
+        noiseGain.gain.setValueAtTime(0.8, currentTime);
+        noiseGain.gain.exponentialRampToValueAtTime(0.001, currentTime + 0.2);
+        
+        // Play all sounds
+        osc1.start(currentTime);
+        osc1.stop(currentTime + 0.15);
+        
+        osc2.start(currentTime);
+        osc2.stop(currentTime + 0.25);
+        
+        osc3.start(currentTime + 0.15);
+        osc3.stop(currentTime + 0.3);
+        
+        noiseSource.start(currentTime);
+        noiseSource.stop(currentTime + 0.2);
+        
     } catch (e) {
-        // Bỏ qua nếu lỗi
+        console.log('Cannot play sound:', e);
+        // Fallback: simple click sound
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            
+            osc.frequency.value = 800;
+            gain.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.1);
+            
+            osc.start();
+            osc.stop(audioContext.currentTime + 0.1);
+        } catch (fallbackError) {
+            console.log('Fallback sound also failed:', fallbackError);
+        }
     }
 }
 
@@ -318,7 +412,6 @@ let resizeTimeout;
 window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
-        // Có thể thêm logic resize nếu cần
         updateNavigation();
     }, 250);
 });
