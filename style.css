@@ -551,78 +551,101 @@ body {
 
 @media (max-width: 480px) {
     .book-container {
-        height: 90vh;
-        max-height: 650px;
-        min-height: 450px;
+        height: 95vh;
+        max-height: 700px;
+        min-height: 500px;
+        width: 98%;
     }
     
     .page-content {
-        padding: 35px 25px;
+        padding: 40px 30px;
     }
     
     .page-title {
-        font-size: 2.4rem;
-        margin-bottom: 1rem;
-    }
-    
-    .cover-title {
-        font-size: 3.2rem;
-        line-height: 1.1;
-    }
-    
-    .cover-subtitle {
-        font-size: 1.4rem;
-    }
-    
-    .cover-description {
-        font-size: 1.2rem;
-    }
-    
-    .page-description {
-        font-size: 1.1rem;
-        line-height: 1.6;
-    }
-    
-    .page-date {
-        font-size: 1.15rem;
-        margin-bottom: 1.8rem;
-    }
-    
-    .page-icon {
-        font-size: 3rem;
+        font-size: 2.8rem;
         margin-bottom: 1.2rem;
     }
     
+    .cover-title {
+        font-size: 3.8rem;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+    }
+    
+    .cover-subtitle {
+        font-size: 1.6rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .cover-description {
+        font-size: 1.4rem;
+        margin-bottom: 2rem;
+    }
+    
+    .page-description {
+        font-size: 1.25rem;
+        line-height: 1.7;
+        margin-bottom: 2rem;
+    }
+    
+    .page-date {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+    }
+    
+    .page-icon {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
     .nav-btn {
-        padding: 12px 18px;
-        font-size: 0.95rem;
+        padding: 14px 20px;
+        font-size: 1.1rem;
+        min-width: 80px;
     }
     
     .page-indicator {
-        bottom: 20px;
-        padding: 8px 20px;
-        font-size: 0.9rem;
+        bottom: 25px;
+        padding: 12px 25px;
+        font-size: 1.1rem;
+        font-weight: 500;
     }
     
     .final-message {
-        font-size: 1.05rem;
+        font-size: 1.2rem;
+        line-height: 1.8;
     }
     
     .stats-grid {
-        max-width: 280px;
-        gap: 12px;
+        max-width: 320px;
+        gap: 15px;
+        margin: 2.5rem auto;
     }
     
     .stat-item {
-        padding: 15px 12px;
+        padding: 20px 15px;
+        border-radius: 20px;
     }
     
     .stat-number {
-        font-size: 2rem;
+        font-size: 2.8rem;
+        margin-bottom: 8px;
     }
     
     .stat-label {
-        font-size: 0.9rem;
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+    
+    .music-btn {
+        padding: 12px 18px;
+        font-size: 1rem;
+    }
+    
+    /* Tăng kích thước các element khác */
+    .cover-decoration {
+        font-size: 2.5rem;
+        margin-top: 1.5rem;
     }
 }
 
