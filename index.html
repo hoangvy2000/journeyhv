@@ -9,8 +9,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Canvas cho hiệu ứng Attack on Titan -->
-    <canvas id="titanCanvas"></canvas>
+    <!-- Floating particles background -->
+    <div class="particles-container" id="particles"></div>
+
+    <!-- Audio player -->
+    <audio id="backgroundMusic" loop>
+        <source src="background-music.mp3" type="audio/mpeg">
+    </audio>
 
     <!-- Điều khiển hiệu ứng -->
     <div class="effect-controls">
@@ -18,9 +23,9 @@
             <i class="fas fa-music"></i>
             <span>Nhạc nền</span>
         </button>
-        <button id="titanToggle" class="control-btn">
-            <i class="fas fa-bolt"></i>
-            <span>Titan Effect</span>
+        <button id="particlesToggle" class="control-btn active">
+            <i class="fas fa-sparkles"></i>
+            <span>Hiệu ứng</span>
         </button>
     </div>
 
@@ -50,8 +55,11 @@
 
             <div class="timeline">
                 <!-- Kỷ niệm 1: Gặp nhau lần đầu -->
-                <div class="memory-card left" data-memory="memory1" data-bg="memory1.jpg">
-                    <div class="memory-background"></div>
+                <div class="memory-card left" data-memory="memory1">
+                    <div class="memory-image">
+                        <img src="https://images.unsplash.com/photo-1518621012118-1d014ca9071d?w=400&h=300&fit=crop" alt="Gặp nhau lần đầu" loading="lazy">
+                        <div class="image-overlay"></div>
+                    </div>
                     <div class="memory-content">
                         <div class="memory-icon">
                             <div class="icon-circle">
@@ -68,8 +76,11 @@
                 </div>
 
                 <!-- Kỷ niệm 2: Tỏ tình -->
-                <div class="memory-card right" data-memory="memory2" data-bg="memory2.jpg">
-                    <div class="memory-background"></div>
+                <div class="memory-card right" data-memory="memory2">
+                    <div class="memory-image">
+                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop" alt="Tỏ tình tại cafe" loading="lazy">
+                        <div class="image-overlay"></div>
+                    </div>
                     <div class="memory-content">
                         <div class="memory-icon">
                             <div class="icon-circle">
@@ -87,8 +98,11 @@
                 </div>
 
                 <!-- Kỷ niệm 3: Du lịch đầu tiên -->
-                <div class="memory-card left" data-memory="memory3" data-bg="memory3.jpg">
-                    <div class="memory-background"></div>
+                <div class="memory-card left" data-memory="memory3">
+                    <div class="memory-image">
+                        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop" alt="Đảo Bình Hưng" loading="lazy">
+                        <div class="image-overlay"></div>
+                    </div>
                     <div class="memory-content">
                         <div class="memory-icon">
                             <div class="icon-circle">
@@ -106,8 +120,11 @@
                 </div>
 
                 <!-- Kỷ niệm 4: Vũng Tàu -->
-                <div class="memory-card right" data-memory="memory4" data-bg="memory4.jpg">
-                    <div class="memory-background"></div>
+                <div class="memory-card right" data-memory="memory4">
+                    <div class="memory-image">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=300&fit=crop" alt="Vũng Tàu đón năm mới" loading="lazy">
+                        <div class="image-overlay"></div>
+                    </div>
                     <div class="memory-content">
                         <div class="memory-icon">
                             <div class="icon-circle">
@@ -125,8 +142,11 @@
                 </div>
 
                 <!-- Kỷ niệm 5: Hồ Trị An -->
-                <div class="memory-card left" data-memory="memory5" data-bg="memory5.jpg">
-                    <div class="memory-background"></div>
+                <div class="memory-card left" data-memory="memory5">
+                    <div class="memory-image">
+                        <img src="https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=400&h=300&fit=crop" alt="Hồ Trị An" loading="lazy">
+                        <div class="image-overlay"></div>
+                    </div>
                     <div class="memory-content">
                         <div class="memory-icon">
                             <div class="icon-circle">
@@ -144,8 +164,11 @@
                 </div>
 
                 <!-- Kỷ niệm 6: Nam Cát Tiên -->
-                <div class="memory-card right" data-memory="memory6" data-bg="memory6.jpg">
-                    <div class="memory-background"></div>
+                <div class="memory-card right" data-memory="memory6">
+                    <div class="memory-image">
+                        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop" alt="Nam Cát Tiên" loading="lazy">
+                        <div class="image-overlay"></div>
+                    </div>
                     <div class="memory-content">
                         <div class="memory-icon">
                             <div class="icon-circle">
@@ -163,8 +186,11 @@
                 </div>
 
                 <!-- Kỷ niệm 7: Làm phụ rể -->
-                <div class="memory-card left" data-memory="memory7" data-bg="memory7.jpg">
-                    <div class="memory-background"></div>
+                <div class="memory-card left" data-memory="memory7">
+                    <div class="memory-image">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=300&fit=crop" alt="Phụ rể và phù dâu" loading="lazy">
+                        <div class="image-overlay"></div>
+                    </div>
                     <div class="memory-content">
                         <div class="memory-icon">
                             <div class="icon-circle">
@@ -182,8 +208,11 @@
                 </div>
 
                 <!-- Kỷ niệm 8: 1 năm yêu nhau -->
-                <div class="memory-card right" data-memory="memory8" data-bg="memory8.jpg">
-                    <div class="memory-background"></div>
+                <div class="memory-card right" data-memory="memory8">
+                    <div class="memory-image">
+                        <img src="https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=300&fit=crop" alt="1 năm yêu nhau" loading="lazy">
+                        <div class="image-overlay"></div>
+                    </div>
                     <div class="memory-content">
                         <div class="memory-icon">
                             <div class="icon-circle">
@@ -201,8 +230,11 @@
                 </div>
 
                 <!-- Kỷ niệm 9: Thiện nguyện -->
-                <div class="memory-card left" data-memory="memory9" data-bg="memory9.jpg">
-                    <div class="memory-background"></div>
+                <div class="memory-card left" data-memory="memory9">
+                    <div class="memory-image">
+                        <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=400&h=300&fit=crop" alt="Thiện nguyện Trà Vinh" loading="lazy">
+                        <div class="image-overlay"></div>
+                    </div>
                     <div class="memory-content">
                         <div class="memory-icon">
                             <div class="icon-circle">
@@ -220,8 +252,11 @@
                 </div>
 
                 <!-- Kỷ niệm 10: Cá - chú mèo -->
-                <div class="memory-card right" data-memory="memory10" data-bg="memory10.jpg">
-                    <div class="memory-background"></div>
+                <div class="memory-card right" data-memory="memory10">
+                    <div class="memory-image">
+                        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=300&fit=crop" alt="Nhặt được bé Cá" loading="lazy">
+                        <div class="image-overlay"></div>
+                    </div>
                     <div class="memory-content">
                         <div class="memory-icon">
                             <div class="icon-circle">
@@ -239,8 +274,11 @@
                 </div>
 
                 <!-- Kỷ niệm 11: Rooftop -->
-                <div class="memory-card left" data-memory="memory11" data-bg="memory11.jpg">
-                    <div class="memory-background"></div>
+                <div class="memory-card left" data-memory="memory11">
+                    <div class="memory-image">
+                        <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=300&fit=crop" alt="Khám phá rooftop" loading="lazy">
+                        <div class="image-overlay"></div>
+                    </div>
                     <div class="memory-content">
                         <div class="memory-icon">
                             <div class="icon-circle">
@@ -266,17 +304,17 @@
                 <div class="stats-grid">
                     <div class="stat-item">
                         <div class="stat-icon">📅</div>
-                        <div class="stat-number" data-count="731">731</div>
+                        <div class="stat-number" data-count="731">0</div>
                         <div class="stat-label">Ngày bên nhau</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-icon">🎯</div>
-                        <div class="stat-number" data-count="15">15+</div>
+                        <div class="stat-number" data-count="15">0</div>
                         <div class="stat-label">Chuyến đi</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-icon">📸</div>
-                        <div class="stat-number" data-count="1000">1000+</div>
+                        <div class="stat-number" data-count="1000">0</div>
                         <div class="stat-label">Khoảnh khắc</div>
                     </div>
                     <div class="stat-item">
@@ -294,6 +332,9 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <div class="modal-body">
+                <div class="modal-image">
+                    <img src="" alt="" id="modalImage">
+                </div>
                 <div class="modal-icon"></div>
                 <h2 class="modal-title"></h2>
                 <div class="modal-date"></div>
